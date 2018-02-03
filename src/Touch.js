@@ -145,6 +145,7 @@ export class TouchBackend {
             enableKeyboardEvents: false,
             delayTouchStart: 0,
             delayMouseStart: 0,
+            touchSlop: 0,
             ...options
         };
 
@@ -156,6 +157,7 @@ export class TouchBackend {
         this.enableMouseEvents = options.enableMouseEvents;
         this.delayTouchStart = options.delayTouchStart;
         this.delayMouseStart = options.delayMouseStart;
+        this.touchSlop = options.touchSlop;
         this.sourceNodes = {};
         this.sourceNodeOptions = {};
         this.sourcePreviewNodes = {};
@@ -404,17 +406,13 @@ export class TouchBackend {
             return;
         }
 
-
         // If we're not dragging and we've moved a little, that counts as a drag start
         if (
             !this.monitor.isDragging() &&
             this._mouseClientOffset.hasOwnProperty('x') &&
-            moveStartSourceIds &&
-            (
-                this._mouseClientOffset.x !== clientOffset.x ||
-                this._mouseClientOffset.y !== clientOffset.y
-            )
-        ) {
+            moveStartSourceIds && 
+            distance(this._mouseClientOffset.x, this._mouseClientOffset.y, clientOffset.x, clientOffset.y) >
+                (this.touchSlop ? this.touchSlop : 0)) {
             this.moveStartSourceIds = null;
             this.actions.beginDrag(moveStartSourceIds, {
                 clientOffset: this._mouseClientOffset,
@@ -550,4 +548,8 @@ export default function createTouchBackend (optionsOrManager = {}) {
     } else {
         return touchBackendFactory;
     }
+}
+
+function distance(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow(Math.abs(x2 - x1), 2) + Math.pow(Math.abs(y2 - y1), 2));
 }
