@@ -143,6 +143,7 @@ export class TouchBackend {
             enableTouchEvents: true,
             enableMouseEvents: false,
             enableKeyboardEvents: false,
+            ignoreContextMenu: false,
             delayTouchStart: 0,
             delayMouseStart: 0,
             touchSlop: 0,
@@ -157,6 +158,7 @@ export class TouchBackend {
         this.enableMouseEvents = options.enableMouseEvents;
         this.delayTouchStart = options.delayTouchStart;
         this.delayMouseStart = options.delayMouseStart;
+        this.ignoreContextMenu = options.ignoreContextMenu;
         this.touchSlop = options.touchSlop;
         this.sourceNodes = {};
         this.sourceNodeOptions = {};
@@ -203,7 +205,7 @@ export class TouchBackend {
         this.addEventListener(window, 'move',       this.handleTopMoveCapture, true);
         this.addEventListener(window, 'end',        this.handleTopMoveEndCapture, true);
 
-        if (this.enableMouseEvents) {
+        if (this.enableMouseEvents && !this.ignoreContextMenu) {
             this.addEventListener(window, 'contextmenu', this.handleTopMoveEndCapture);
         }
 
@@ -226,7 +228,7 @@ export class TouchBackend {
         this.removeEventListener(window, 'move',  this.handleTopMove);
         this.removeEventListener(window, 'end',   this.handleTopMoveEndCapture, true);
 
-        if (this.enableMouseEvents) {
+        if (this.enableMouseEvents && !this.ignoreContextMenu) {
             this.removeEventListener(window, 'contextmenu', this.handleTopMoveEndCapture);
         }
 
