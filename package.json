@@ -1,5 +1,5 @@
 {
-  "name": "react-dnd-touch-backend",
+  "name": "@faithlife/react-dnd-touch-backend",
   "version": "0.3.20",
   "description": "Touch backend for react-dnd",
   "main": "dist/Touch.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yahoo/react-dnd-touch-backend.git"
+    "url": "git+https://github.com/Faithlife/react-dnd-touch-backend.git"
   },
   "keywords": [
     "react",
@@ -23,9 +23,13 @@
   "author": "Long Ho <holevietlong@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yahoo/react-dnd-touch-backend/issues"
+    "url": "https://github.com/Faithlife/react-dnd-touch-backend/issues"
   },
-  "homepage": "https://github.com/yahoo/react-dnd-touch-backend#readme",
+  "homepage": "https://github.com/Faithlife/react-dnd-touch-backend#readme",
+  "publishConfig": {
+    "tag": "latest",
+    "registry": "http://npm.faithlife.io"
+  },
   "dependencies": {
     "react-dnd": "^2.5.4",
     "invariant": "^2.2.2"

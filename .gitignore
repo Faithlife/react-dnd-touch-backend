@@ -29,3 +29,6 @@ dist/
 *.tgz
 *.browserified.js
 .eslintcache
+
+# IDE
+.vscode
